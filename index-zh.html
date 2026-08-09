@@ -4,17 +4,19 @@
     <meta charset="utf-8">
     <title>周颖 - 个人主页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <link rel="alternate" hreflang="en" href="index.html">
     <link rel="alternate" hreflang="zh-CN" href="index-zh.html">
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
 
-    <div class="masthead">
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <div class="masthead" id="masthead">
         <div class="masthead__inner-wrap">
             <nav id="site-nav" class="greedy-nav">
                 <ul class="visible-links">
@@ -28,9 +30,15 @@
                     <li><a href="#-skills">专业技能</a></li>
                 </ul>
             </nav>
-            <div class="language-switcher" aria-label="语言选择">
-                <a href="index-zh.html" lang="zh-CN" hreflang="zh-CN" aria-current="page">中</a>
-                <a href="index.html" lang="en" hreflang="en" aria-label="切换到英文">EN</a>
+            <div class="masthead__controls">
+                <button class="theme-toggle" id="themeToggle" aria-label="切换暗色模式">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="language-switcher" aria-label="语言选择">
+                    <a href="index-zh.html" lang="zh-CN" hreflang="zh-CN" aria-current="page">中</a>
+                    <a href="index.html" lang="en" hreflang="en" aria-label="切换到英文">EN</a>
+                </div>
             </div>
         </div>
     </div>
@@ -38,7 +46,7 @@
     <div id="main" role="main">
         <!-- Sidebar -->
         <div class="sidebar">
-            <div class="profile_box">
+            <div class="profile_box reveal">
                 <div class="author__avatar">
                     <img src="./sources/head.png" alt="周颖">
                 </div>
@@ -61,9 +69,9 @@
         <div class="page">
             <section class="page__content">
                 <span class="anchor" id="about-me"></span>
-                
+
             <!-- Hero Section -->
-            <section class="profile-hero">
+            <section class="profile-hero reveal">
               <div class="profile-hero__eyebrow">第一性原理 · 量子材料 · 多铁性</div>
               <h1 class="profile-hero__name">周颖 <span>Ying Zhou</span></h1>
               <p class="profile-hero__summary">现任浙江理工大学理学院特聘副教授。博士毕业于东南大学物理学院，师从东南大学物理学院院长、国家杰出青年科学基金获得者董帅教授。</p>
@@ -71,7 +79,7 @@
             </section>
 
                 <!-- Research Grid -->
-                <section class="research-grid">
+                <section class="research-grid reveal-stagger">
                     <div class="research-card">
                         <span>01</span>
                         <strong>第一性原理计算</strong>
@@ -95,8 +103,8 @@
                 </section>
 
                 <!-- News -->
-                <h1 id="-news">🔥 最新动态</h1>
-                <div class="news-timeline">
+                <h1 id="-news" class="reveal">🔥 最新动态</h1>
+                <div class="news-timeline reveal">
                     <ul>
                         <li><em>2026.01</em>：🎉🎉 共同第一作者论文被 <strong>Nature Communications</strong> 接收！</li>
                         <li><em>2025.08</em>：🏆🏆 获得<strong>吴健雄纪念基金女学人奖</strong>（全校 10 人）。</li>
@@ -105,19 +113,19 @@
                     </ul>
                 </div>
 
-                <h1 id="-publications">📝 发表论文</h1>
-                <div class="publication-summary">
-                    <div class="publication-summary__metric"><strong>14</strong><span>篇论文</span></div>
-                    <div class="publication-summary__metric"><strong>6</strong><span>中科院一区</span></div>
-                    <div class="publication-summary__metric"><strong>6</strong><span>中科院二区</span></div>
-                    <div class="publication-summary__metric"><strong>2</strong><span>中科院三区</span></div>
+                <h1 id="-publications" class="reveal">📝 发表论文</h1>
+                <div class="publication-summary reveal">
+                    <div class="publication-summary__metric"><strong class="counter" data-target="14">0</strong><span>篇论文</span></div>
+                    <div class="publication-summary__metric"><strong class="counter" data-target="6">0</strong><span>中科院一区</span></div>
+                    <div class="publication-summary__metric"><strong class="counter" data-target="6">0</strong><span>中科院二区</span></div>
+                    <div class="publication-summary__metric"><strong class="counter" data-target="2">0</strong><span>中科院三区</span></div>
                     <p>论文发表在 <strong>Phys. Rev. Lett.</strong>、<strong>Nat. Commun.</strong>、<strong>Sci. Adv.</strong>、<strong>Adv. Funct. Mater.</strong>、<strong>Phys. Rev. B</strong> 等国际期刊，涵盖磁电耦合、多铁材料与二维材料领域。</p>
                 </div>
-                <div class="publication-list">
-                  <ul>
+                <div class="publication-list reveal">
+                  <ul class="reveal-stagger">
                     <!-- ========== 2026 ========== -->
                     <li>
-                        <img class="pub-fig" src="paper_figs/2026-3.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2026-3.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">CPB 2026-3</span> <span class="pub-badge pub-badge--c">CAS Q3</span>
                             <span class="pub-title">
@@ -129,7 +137,7 @@
                     </li>
 
                     <li>
-                        <img class="pub-fig" src="paper_figs/2026-2.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2026-2.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">AFM 2026-2</span> <span class="pub-badge pub-badge--a">CAS Q1 · TOP</span>
                             <span class="pub-title">
@@ -141,7 +149,7 @@
                     </li>
 
                     <li>
-                        <img class="pub-fig" src="paper_figs/2026-1.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2026-1.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">NC 2026-1</span> <span class="pub-badge pub-badge--a">CAS Q1 · TOP</span>
                             <span class="pub-title">
@@ -154,7 +162,7 @@
 
                     <!-- ========== 2025 ========== -->
                     <li>
-                        <img class="pub-fig" src="paper_figs/2025-4.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2025-4.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">CPL 2025-4</span> <span class="pub-badge pub-badge--a">CAS Q1</span>
                             <span class="pub-title">
@@ -166,7 +174,7 @@
                     </li>
 
                     <li>
-                        <img class="pub-fig" src="paper_figs/2025-3.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2025-3.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">PRB 2025-3</span> <span class="pub-badge pub-badge--b">CAS Q2 · TOP</span>
                             <span class="pub-title">
@@ -178,7 +186,7 @@
                     </li>
 
                     <li>
-                        <img class="pub-fig" src="paper_figs/2025-2.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2025-2.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">PRB 2025-2</span> <span class="pub-badge pub-badge--b">CAS Q2 · TOP</span>
                             <span class="pub-title">
@@ -190,7 +198,7 @@
                     </li>
 
                     <li>
-                        <img class="pub-fig" src="paper_figs/2025-1.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2025-1.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">SA 2025-1</span> <span class="pub-badge pub-badge--a">CAS Q1 · TOP</span>
                             <span class="pub-title">
@@ -203,7 +211,7 @@
 
                     <!-- ========== 2024 ========== -->
                     <li>
-                        <img class="pub-fig" src="paper_figs/2024-2.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2024-2.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">PRM 2024-2</span> <span class="pub-badge pub-badge--c">CAS Q3</span>
                             <span class="pub-title">
@@ -215,7 +223,7 @@
                     </li>
 
                     <li>
-                        <img class="pub-fig" src="paper_figs/2024-1.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2024-1.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">PRB 2024-1</span> <span class="pub-badge pub-badge--b">CAS Q2 · TOP</span>
                             <span class="pub-title">
@@ -228,7 +236,7 @@
 
                     <!-- ========== 2023 ========== -->
                     <li>
-                        <img class="pub-fig" src="paper_figs/2023-2.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2023-2.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">PRAppl 2023-2</span> <span class="pub-badge pub-badge--b">CAS Q2 · TOP</span>
                             <span class="pub-title">
@@ -240,7 +248,7 @@
                     </li>
 
                     <li>
-                        <img class="pub-fig" src="paper_figs/2023-1.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2023-1.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">SA 2023-1</span> <span class="pub-badge pub-badge--a">CAS Q1 · TOP</span>
                             <span class="pub-title">
@@ -253,7 +261,7 @@
 
                     <!-- ========== 2022 ========== -->
                     <li>
-                        <img class="pub-fig" src="paper_figs/2022-2.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2022-2.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">PRB 2022-2</span> <span class="pub-badge pub-badge--b">CAS Q2 · TOP</span>
                             <span class="pub-title">
@@ -265,7 +273,7 @@
                     </li>
 
                     <li>
-                        <img class="pub-fig" src="paper_figs/2022-1.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2022-1.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">PRL 2022-1</span> <span class="pub-badge pub-badge--a">CAS Q1 · TOP</span>
                             <span class="pub-title">
@@ -278,7 +286,7 @@
 
                     <!-- ========== 2021 ========== -->
                     <li>
-                        <img class="pub-fig" src="paper_figs/2021-1.png" alt="" />
+                        <img class="pub-fig" src="paper_figs/2021-1.png" alt="" loading="lazy" />
                         <div class="pub-content">
                             <span class="pub-venue">PRB 2021-1</span> <span class="pub-badge pub-badge--b">CAS Q2 · TOP</span>
                             <span class="pub-title">
@@ -293,8 +301,8 @@
               </div>
 
                 <!-- Research Experience -->
-                <h1 id="-research-experience">🔬 主要研究经历</h1>
-                <div class="experience-grid">
+                <h1 id="-research-experience" class="reveal">🔬 主要研究经历</h1>
+                <div class="experience-grid reveal-stagger">
                     <article class="experience-card">
                         <div class="experience-card__period">2024–2025</div>
                         <h3>二维层状钙钛矿中的面外铁电、交错磁序与压磁效应</h3>
@@ -317,8 +325,8 @@
                     </article>
                 </div>
 
-                <h2 class="publication-group__title">主要合作研究经历</h2>
-                <div class="collaboration-list">
+                <h2 class="publication-group__title reveal">主要合作研究经历</h2>
+                <div class="collaboration-list reveal-stagger">
                     <article class="collaboration-card">
                         <div class="experience-card__period">2024–2025</div>
                         <h3>应变诱导 3d–4d 双钙钛矿中室温亚铁磁与极性相共存</h3>
@@ -332,8 +340,8 @@
                 </div>
 
                 <!-- Conferences -->
-                <h1 id="-conferences">🎤 参加学术会议与荣誉</h1>
-                <ul class="conference-list">
+                <h1 id="-conferences" class="reveal">🎤 参加学术会议与荣誉</h1>
+                <ul class="conference-list reveal">
                     <li><time>2025</time><span>美国磁学年会 · 口头报告</span><span class="conference-location">佛罗里达</span></li>
                     <li><time>2025</time><span>中国材料大会 · 高水平学术墙报奖</span><span class="conference-location">厦门</span></li>
                     <li><time>2025</time><span>第二十届全国电介质物理、材料与应用学术会议 · 口头报告</span><span class="conference-location">成都</span></li>
@@ -344,7 +352,8 @@
                 </ul>
 
                 <!-- Honors & Awards -->
-                <h1 id="-honors-and-awards">🎖 荣誉与主持项目</h1>
+                <h1 id="-honors-and-awards" class="reveal">🎖 荣誉与主持项目</h1>
+                <div class="reveal">
                 <p><strong>荣誉奖励</strong></p>
                 <ul>
                     <li><em>2025</em> <strong>吴健雄纪念基金女学人奖</strong>（全校 10 人）</li>
@@ -356,12 +365,14 @@
                 <p><strong>主持项目</strong></p>
                 <ul>
                     <li><em>2024</em> <strong>主持</strong>，首批中国科协青年人才托举工程博士生专项计划（青托）</li>
-                    <li><em>2025</em> <strong>主持</strong>，东南大学博士研究生创新能力提升计划项目 C 类“磁电材料参数空间拓扑行为”</li>
-                    <li><em>2021</em> <strong>主持</strong>，江苏省研究生科研创新计划项目“基于钙钛矿结构的二维多铁性材料的理论设计”（省创）</li>
+                    <li><em>2025</em> <strong>主持</strong>，东南大学博士研究生创新能力提升计划项目 C 类"磁电材料参数空间拓扑行为"</li>
+                    <li><em>2021</em> <strong>主持</strong>，江苏省研究生科研创新计划项目"基于钙钛矿结构的二维多铁性材料的理论设计"（省创）</li>
                 </ul>
+                </div>
 
                 <!-- Experience -->
-                <h1 id="-experience">💼 工作与社会实践</h1>
+                <h1 id="-experience" class="reveal">💼 工作与社会实践</h1>
+                <div class="reveal">
                 <p><strong>工作经历</strong></p>
                 <ul>
                     <li><em>2026 至今</em>，<strong>特聘副教授</strong>，浙江理工大学理学院</li>
@@ -372,15 +383,209 @@
                     <li><em>2023</em> <strong>主办方学生后勤主管</strong>，第十九届全国电介质物理、材料与应用学术会议</li>
                     <li><em>2023</em> <strong>大学物理助教</strong>，东南大学物理学院</li>
                 </ul>
+                </div>
 
                 <!-- Skills -->
-                <h1 id="-skills">🛠 专业技能</h1>
+                <h1 id="-skills" class="reveal">🛠 专业技能</h1>
+                <div class="reveal">
                 <ul>
                     <li>熟练使用 <strong>VASP、ABINIT、WANNIER90、BoltzTraP2</strong> 等第一性原理计算及后处理软件。</li>
                     <li>具备良好的英文阅读与写作能力。</li>
                 </ul>
+                </div>
             </section>
         </div>
     </div>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="回到顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox__close" id="lightboxClose" aria-label="关闭">×</button>
+        <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+    </div>
+
+    <script>
+    (function() {
+        // =====================================================================
+        // Dark Mode Toggle
+        // =====================================================================
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            html.setAttribute('data-theme', 'dark');
+        } else if (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.setAttribute('data-theme', 'dark');
+        }
+
+        themeToggle.addEventListener('click', function() {
+            if (html.hasAttribute('data-theme')) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // =====================================================================
+        // Reading Progress Bar
+        // =====================================================================
+        const progressBar = document.getElementById('readingProgress');
+        function updateProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+            progressBar.style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateProgress, { passive: true });
+
+        // =====================================================================
+        // Masthead scroll effect
+        // =====================================================================
+        const masthead = document.getElementById('masthead');
+        function updateMasthead() {
+            if (window.scrollY > 10) {
+                masthead.classList.add('scrolled');
+            } else {
+                masthead.classList.remove('scrolled');
+            }
+        }
+        window.addEventListener('scroll', updateMasthead, { passive: true });
+
+        // =====================================================================
+        // Scrollspy - Active nav link
+        // =====================================================================
+        const navLinks = document.querySelectorAll('.greedy-nav a');
+        const sections = [];
+        navLinks.forEach(function(link) {
+            var href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                var el = document.getElementById(href.substring(1));
+                if (el) sections.push({ link: link, el: el });
+            }
+        });
+
+        function updateActiveLink() {
+            var scrollPos = window.scrollY + 100;
+            var active = null;
+            sections.forEach(function(s) {
+                if (s.el.offsetTop <= scrollPos) {
+                    active = s;
+                }
+            });
+            navLinks.forEach(function(l) { l.classList.remove('active'); });
+            if (active) active.link.classList.add('active');
+        }
+        window.addEventListener('scroll', updateActiveLink, { passive: true });
+
+        // =====================================================================
+        // Back to Top
+        // =====================================================================
+        const backToTop = document.getElementById('backToTop');
+        function toggleBackToTop() {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+        window.addEventListener('scroll', toggleBackToTop, { passive: true });
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // =====================================================================
+        // Reveal Animations (Intersection Observer)
+        // =====================================================================
+        var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) {
+            revealObserver.observe(el);
+        });
+
+        // =====================================================================
+        // Counter Animation
+        // =====================================================================
+        var counterObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var el = entry.target;
+                    var target = parseInt(el.getAttribute('data-target'), 10);
+                    var duration = 1200;
+                    var startTime = null;
+
+                    function animate(ts) {
+                        if (!startTime) startTime = ts;
+                        var elapsed = ts - startTime;
+                        var progress = Math.min(elapsed / duration, 1);
+                        var eased = 1 - (1 - progress) * (1 - progress);
+                        el.textContent = Math.round(eased * target);
+                        if (progress < 1) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            el.textContent = target;
+                        }
+                    }
+
+                    requestAnimationFrame(animate);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.6 });
+
+        document.querySelectorAll('.counter').forEach(function(el) {
+            counterObserver.observe(el);
+        });
+
+        // =====================================================================
+        // Lightbox
+        // =====================================================================
+        var lightbox = document.getElementById('lightbox');
+        var lightboxImg = document.getElementById('lightboxImg');
+        var lightboxClose = document.getElementById('lightboxClose');
+
+        document.querySelectorAll('.pub-fig').forEach(function(img) {
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                lightboxImg.src = img.src;
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+        });
+
+        // Initial calls
+        updateProgress();
+        updateMasthead();
+        updateActiveLink();
+        toggleBackToTop();
+    })();
+    </script>
 </body>
 </html>
