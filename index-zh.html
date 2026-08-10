@@ -11,13 +11,27 @@
     <link rel="alternate" hreflang="en" href="index.html">
     <link rel="alternate" hreflang="zh-CN" href="index-zh.html">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%233182ce'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='17' font-weight='700' fill='white'>YZ</text></svg>">
 </head>
 <body>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader__spinner"></div>
+    </div>
+
+    <!-- Background Particles -->
+    <canvas id="particles"></canvas>
 
     <div class="reading-progress" id="readingProgress"></div>
 
     <div class="masthead" id="masthead">
         <div class="masthead__inner-wrap">
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <nav id="site-nav" class="greedy-nav">
                 <ul class="visible-links">
                     <li><a href="#about-me">主页</a></li>
@@ -59,7 +73,7 @@
                         <li><div style="white-space: normal; margin-bottom: 1em; color: var(--text-muted); font-weight: 500;">量子功能材料</div></li>
                         <li><i class="fas fa-fw fa-map-marker-alt"></i> 杭州，中国</li>
                         <li><i class="fas fa-fw fa-university"></i> 浙江理工大学</li>
-                        <li><i class="fas fa-fw fa-envelope"></i> zhouying_arale@163.com</li>
+                        <li><i class="fas fa-fw fa-envelope"></i> zhouying_arale@163.com <button class="copy-email" id="copyEmail" aria-label="复制邮箱"><i class="fas fa-copy"></i></button></li>
                     </ul>
                 </div>
             </div>
@@ -80,22 +94,22 @@
 
                 <!-- Research Grid -->
                 <section class="research-grid reveal-stagger">
-                    <div class="research-card">
+                    <div class="research-card" data-detail="基于密度泛函理论（DFT），运用VASP、ABINIT等第一性原理计算软件，从微观角度研究量子材料的电子结构、磁有序、铁电极化和晶格动力学，为新型功能材料的理性设计提供理论指导。">
                         <span>01</span>
                         <strong>第一性原理计算</strong>
                         <p>研究磁性、铁电与多铁材料的微观机制及量子物性。</p>
                     </div>
-                    <div class="research-card">
+                    <div class="research-card" data-detail="探索多铁体系中磁有序与电有序之间的交叉耦合机制，包括自旋依赖的量子输运特性、外场驱动的量子态调控，以及低维和关联材料中磁电效应的微观起源。">
                         <span>02</span>
                         <strong>磁电耦合</strong>
                         <p>探索磁电耦合效应、自旋电子学输运及量子态调控。</p>
                     </div>
-                    <div class="research-card">
+                    <div class="research-card" data-detail="聚焦于二维Ruddlesden–Popper钙钛矿及相关层状体系，研究面外铁电性、交错磁序（altermagnetism）、压磁效应以及持久自旋织构，为下一代纳米级多功能器件提供理论基础。">
                         <span>03</span>
                         <strong>二维多铁材料</strong>
                         <p>研究二维层状钙钛矿中的面外铁电、交错磁序与压磁效应。</p>
                     </div>
-                    <div class="research-card">
+                    <div class="research-card" data-detail="研究量子材料中受拓扑保护的磁电响应，包括拓扑逆磁电效应、5d卤化物体系中的室温铁磁性以及磁电参数空间中的非平庸拓扑行为。">
                         <span>04</span>
                         <strong>拓扑磁电效应</strong>
                         <p>研究拓扑保护的逆磁电效应及室温铁磁多铁物性。</p>
@@ -275,12 +289,12 @@
                     <li>
                         <img class="pub-fig" src="paper_figs/2022-1.png" alt="" loading="lazy" />
                         <div class="pub-content">
-                            <span class="pub-venue">PRL 2022-1</span> <span class="pub-badge pub-badge--a">CAS Q1 · TOP</span>
+                            <span class="pub-venue">PRL 2022-1</span> <span class="pub-badge pub-badge--a">CAS Q1 · TOP</span> <span class="pub-badge pub-badge--cover">封面文章</span>
                             <span class="pub-title">
                                 <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.129.117603" target="_blank" rel="noopener"><strong>钙钛矿中自旋诱导铁电性与铁磁性的共存与耦合</strong></a>
                             </span><br />
                             <strong>Y. Zhou</strong>（Co-first）, et al.<br />
-                            <em>Physical Review Letters</em>, 129, 117603 (2022). <span class="pub-highlight">（封面文章）</span>
+                            <em>Physical Review Letters</em>, 129, 117603 (2022).
                         </div>
                     </li>
 
@@ -396,6 +410,14 @@
             </section>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        &copy; 2026 周颖 版权所有<span class="site-footer__divider">|</span>最后更新：2026年8月
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
 
     <!-- Back to Top -->
     <button class="back-to-top" id="backToTop" aria-label="回到顶部">
@@ -580,6 +602,293 @@
             if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
         });
 
+        // =====================================================================
+        // Preloader
+        // =====================================================================
+        var preloader = document.getElementById('preloader');
+        window.addEventListener('load', function() {
+            preloader.classList.add('preloader--hidden');
+        });
+        setTimeout(function() {
+            preloader.classList.add('preloader--hidden');
+        }, 3000);
+
+        // =====================================================================
+        // Background Particles
+        // =====================================================================
+        var canvas = document.getElementById('particles');
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+        var particleCount = 50;
+        var connectionDist = 120;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.documentElement.scrollHeight;
+        }
+
+        function createParticles() {
+            particles = [];
+            for (var i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    r: Math.random() * 2 + 1
+                });
+            }
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var isDark = html.hasAttribute('data-theme');
+            var dotColor = isDark ? 'rgba(148,163,184,0.25)' : 'rgba(100,116,139,0.18)';
+            var lineColor = isDark ? 'rgba(148,163,184,0.07)' : 'rgba(100,116,139,0.05)';
+
+            for (var i = 0; i < particles.length; i++) {
+                var p = particles[i];
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = dotColor;
+                ctx.fill();
+
+                for (var j = i + 1; j < particles.length; j++) {
+                    var q = particles[j];
+                    var dx = p.x - q.x;
+                    var dy = p.y - q.y;
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < connectionDist) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(q.x, q.y);
+                        ctx.strokeStyle = lineColor;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < -10) p.x = canvas.width + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.y < -10) p.y = canvas.height + 10;
+                if (p.y > canvas.height + 10) p.y = -10;
+            }
+
+            requestAnimationFrame(drawParticles);
+        }
+
+        resizeCanvas();
+        createParticles();
+        drawParticles();
+
+        window.addEventListener('resize', function() {
+            resizeCanvas();
+            createParticles();
+        });
+
+        var lastHeight = document.documentElement.scrollHeight;
+        window.addEventListener('scroll', function() {
+            var h = document.documentElement.scrollHeight;
+            if (h !== lastHeight) {
+                lastHeight = h;
+                canvas.height = h;
+            }
+        }, { passive: true });
+
+        // =====================================================================
+        // Hamburger Menu
+        // =====================================================================
+        var hamburger = document.getElementById('hamburger');
+        var visibleLinks = document.querySelector('.greedy-nav ul.visible-links');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            visibleLinks.classList.toggle('open');
+        });
+
+        visibleLinks.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                visibleLinks.classList.remove('open');
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !visibleLinks.contains(e.target)) {
+                hamburger.classList.remove('active');
+                visibleLinks.classList.remove('open');
+            }
+        });
+
+        // =====================================================================
+        // Copy Email
+        // =====================================================================
+        var copyBtn = document.getElementById('copyEmail');
+        var toast = document.getElementById('toast');
+        var toastTimer = null;
+
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('toast--visible');
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(function() {
+                toast.classList.remove('toast--visible');
+            }, 2000);
+        }
+
+        copyBtn.addEventListener('click', function() {
+            var email = 'zhouying_arale@163.com';
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(function() {
+                    copyBtn.classList.add('copied');
+                    showToast('邮箱已复制！');
+                    setTimeout(function() { copyBtn.classList.remove('copied'); }, 1500);
+                }).catch(function() {
+                    fallbackCopy(email);
+                });
+            } else {
+                fallbackCopy(email);
+            }
+        });
+
+        function fallbackCopy(text) {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand('copy');
+                copyBtn.classList.add('copied');
+                showToast('邮箱已复制！');
+                setTimeout(function() { copyBtn.classList.remove('copied'); }, 1500);
+            } catch (e) {
+                showToast('复制失败，请手动复制');
+            }
+            document.body.removeChild(ta);
+        }
+
+        // =====================================================================
+        // Research Card Tooltip (Desktop) / Modal (Mobile)
+        // =====================================================================
+        var researchCards = document.querySelectorAll('.research-card[data-detail]');
+        var isMobile = window.matchMedia('(max-width: 900px)');
+
+        var tooltip = document.createElement('div');
+        tooltip.className = 'research-tooltip';
+        tooltip.id = 'researchTooltip';
+        document.body.appendChild(tooltip);
+
+        var modalOverlay = document.createElement('div');
+        modalOverlay.className = 'research-modal-overlay';
+        modalOverlay.id = 'researchModalOverlay';
+        modalOverlay.innerHTML = '<div class="research-modal"><button class="research-modal__close" id="researchModalClose">&times;</button><div class="research-modal__number" id="researchModalNumber"></div><h3 class="research-modal__title" id="researchModalTitle"></h3><p class="research-modal__body" id="researchModalBody"></p></div>';
+        document.body.appendChild(modalOverlay);
+
+        var modalNumber = document.getElementById('researchModalNumber');
+        var modalTitle = document.getElementById('researchModalTitle');
+        var modalBody = document.getElementById('researchModalBody');
+        var modalClose = document.getElementById('researchModalClose');
+
+        var activeCard = null;
+
+        function showTooltip(card, e) {
+            if (isMobile.matches) return;
+            var detail = card.getAttribute('data-detail');
+            if (!detail) return;
+            tooltip.textContent = detail;
+            tooltip.classList.add('research-tooltip--visible');
+
+            var rect = card.getBoundingClientRect();
+            var tipWidth = 380;
+            var left = rect.left + (rect.width / 2) - (tipWidth / 2);
+
+            if (left < 16) left = 16;
+            if (left + tipWidth > window.innerWidth - 16) left = window.innerWidth - tipWidth - 16;
+
+            var top = rect.bottom + 10;
+            var tipHeight = tooltip.offsetHeight || 100;
+            if (top + tipHeight > window.innerHeight - 16) {
+                top = rect.top - tipHeight - 10;
+            }
+
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+
+        function hideTooltip() {
+            tooltip.classList.remove('research-tooltip--visible');
+        }
+
+        function openModal(card) {
+            var number = card.querySelector('span').textContent;
+            var title = card.querySelector('strong').textContent;
+            var detail = card.getAttribute('data-detail');
+
+            modalNumber.textContent = number;
+            modalTitle.textContent = title;
+            modalBody.textContent = detail;
+            modalOverlay.classList.add('research-modal-overlay--open');
+            document.body.style.overflow = 'hidden';
+            card.classList.add('active');
+            activeCard = card;
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('research-modal-overlay--open');
+            document.body.style.overflow = '';
+            if (activeCard) {
+                activeCard.classList.remove('active');
+                activeCard = null;
+            }
+        }
+
+        var tooltipTimer = null;
+
+        researchCards.forEach(function(card) {
+            card.addEventListener('mouseenter', function(e) {
+                if (!isMobile.matches) {
+                    clearTimeout(tooltipTimer);
+                    tooltipTimer = setTimeout(function() {
+                        showTooltip(card, e);
+                    }, 2000);
+                }
+            });
+
+            card.addEventListener('mouseleave', function() {
+                clearTimeout(tooltipTimer);
+                hideTooltip();
+            });
+
+            card.addEventListener('mousemove', function(e) {
+                if (!isMobile.matches && tooltip.classList.contains('research-tooltip--visible')) {
+                    showTooltip(card, e);
+                }
+            });
+
+            card.addEventListener('click', function() {
+                if (isMobile.matches) {
+                    openModal(card);
+                }
+            });
+        });
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('research-modal-overlay--open')) {
+                closeModal();
+            }
+        });
+
+        // =====================================================================
         // Initial calls
         updateProgress();
         updateMasthead();
