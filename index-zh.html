@@ -573,7 +573,7 @@
             img.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                lightboxImg.src = img.src;
+                lightboxImg.src = img.src.replace('.webp', '.png');
                 lightbox.classList.add('open');
                 document.body.style.overflow = 'hidden';
             });
