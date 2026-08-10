@@ -1522,3 +1522,27 @@ h1 {
 [data-theme="dark"] .toast {
     background: #334155;
 }
+
+/* ==========================================================================
+   Effects Canvas (news click animations)
+   ========================================================================== */
+#fxCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    pointer-events: none;
+}
+
+.fx-emoji {
+    position: fixed;
+    z-index: 3001;
+    pointer-events: none;
+    font-size: 3rem;
+    animation: fx-rise 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fx-rise {
+    0%   { opacity: 1; transform: translateY(0) scale(0.6) rotate(-10deg); }
+    30%  { opacity: 1; transform: translateY(-40vh) scale(1.1) rotate(5deg); }
+    100% { opacity: 0; transform: translateY(-110vh) scale(0.8) rotate(15deg); }
+}
