@@ -50,12 +50,16 @@ body {
 a {
     color: var(--primary-color);
     text-decoration: none;
-    transition: color 0.2s ease;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1.5px;
+    transition: color 0.2s ease, background-size 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 a:hover {
     color: #2b6cb0;
-    text-decoration: underline;
+    background-size: 100% 1.5px;
 }
 
 h1 {
@@ -137,6 +141,7 @@ h1 {
     font-weight: 500;
     position: relative;
     padding: 4px 0;
+    background-image: none;
     transition: color 0.25s ease;
 }
 
@@ -832,6 +837,7 @@ h1 {
     text-align: center;
     font-size: 0.8rem;
     font-weight: 700;
+    background-image: none;
     transition: color 0.2s ease, background 0.2s ease;
 }
 
@@ -1128,7 +1134,6 @@ h1 {
 
 .pub-links a:hover {
     color: var(--accent-red);
-    text-decoration: underline;
 }
 
 /* ==========================================================================
