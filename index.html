@@ -1133,7 +1133,7 @@
         var HIT_KEY = 'page-hits';
 
         function loadHitCount() {
-            fetch('https://api.countapi.xyz/hit/' + NS + '/' + HIT_KEY)
+            fetch('https://abacus.jasoncameron.dev/hit/' + NS + '/' + HIT_KEY)
                 .then(function(r) { return r.json(); })
                 .then(function(data) {
                     document.getElementById('hitCount').textContent = data.value;
