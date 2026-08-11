@@ -403,7 +403,7 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-        &copy; 2026 Ying Zhou. All rights reserved.<span class="site-footer__divider">|</span>Last updated: <span id="lastUpdated">August 2026</span>
+        &copy; 2026 Ying Zhou. All rights reserved.<span class="site-footer__divider">|</span>Last updated: <span id="lastUpdated">August 2026</span><span class="site-footer__divider">|</span>Visits: <span id="hitCount">...</span>
     </footer>
 
     <!-- Toast -->
@@ -1125,6 +1125,25 @@
             card.style.cursor = 'pointer';
             card.addEventListener('click', function() { triggerFx(card); });
         });
+
+        // =====================================================================
+        // Page hit counter (CountAPI)
+        // =====================================================================
+        var NS = 'yingzhou-site';
+        var HIT_KEY = 'page-hits';
+
+        function loadHitCount() {
+            fetch('https://api.countapi.xyz/hit/' + NS + '/' + HIT_KEY)
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    document.getElementById('hitCount').textContent = data.value;
+                })
+                .catch(function() {
+                    document.getElementById('hitCount').textContent = '--';
+                });
+        }
+
+        loadHitCount();
 
         // =====================================================================
         // Initial calls
