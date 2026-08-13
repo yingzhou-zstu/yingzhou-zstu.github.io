@@ -10,7 +10,7 @@
 
     <link rel="alternate" hreflang="en" href="index.html">
     <link rel="alternate" hreflang="zh-CN" href="index-zh.html">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css?v=3">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%233182ce'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='17' font-weight='700' fill='white'>YZ</text></svg>">
 </head>
 <body>
@@ -72,7 +72,7 @@
                         <li><div style="white-space: normal; margin-bottom: 1em; color: var(--text-muted); font-weight: 500;">Quantum Functional Materials.</div></li>
                         <li><i class="fas fa-fw fa-map-marker-alt"></i> Hangzhou, China</li>
                         <li><i class="fas fa-fw fa-university"></i> Zhejiang Sci-Tech University</li>
-                        <li><i class="fas fa-fw fa-envelope"></i> <button class="copy-email" id="copyEmail" aria-label="Copy email">Email</button></li>
+                        <li><i class="fas fa-fw fa-envelope"></i> <a href="mailto:zhouying_arale@163.com">Email</a></li>
                         <li><i class="fas fa-fw fa-graduation-cap"></i> <a href="https://scholar.google.com/citations?hl=ja&user=NNUW3t4AAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
                     </ul>
                 </div>
@@ -407,9 +407,6 @@
         &copy; 2026 Ying Zhou. All rights reserved.<span class="site-footer__divider">|</span>Last updated: <span id="lastUpdated">August 2026</span><span class="site-footer__divider">|</span>Visits: <span id="hitCount">...</span>
     </footer>
 
-    <!-- Toast -->
-    <div class="toast" id="toast"></div>
-
     <!-- Back to Top -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
@@ -723,51 +720,6 @@
                 visibleLinks.classList.remove('open');
             }
         });
-
-        // =====================================================================
-        // Copy Email
-        // =====================================================================
-        var copyBtn = document.getElementById('copyEmail');
-        var toast = document.getElementById('toast');
-        var toastTimer = null;
-
-        function showToast(msg) {
-            toast.textContent = msg;
-            toast.classList.add('toast--visible');
-            if (toastTimer) clearTimeout(toastTimer);
-            toastTimer = setTimeout(function() {
-                toast.classList.remove('toast--visible');
-            }, 2000);
-        }
-
-        copyBtn.addEventListener('click', function() {
-            var email = 'zhouying_arale@163.com';
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(email).then(function() {
-                    showToast('Email copied!');
-                }).catch(function() {
-                    fallbackCopy(email);
-                });
-            } else {
-                fallbackCopy(email);
-            }
-        });
-
-        function fallbackCopy(text) {
-            var ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.position = 'fixed';
-            ta.style.left = '-9999px';
-            document.body.appendChild(ta);
-            ta.select();
-            try {
-                document.execCommand('copy');
-                showToast('Email copied!');
-            } catch (e) {
-                showToast('Copy failed, please manually copy');
-            }
-            document.body.removeChild(ta);
-        }
 
         // =====================================================================
         // Research Card Tooltip (Desktop) / Modal (Mobile)
