@@ -1471,28 +1471,29 @@ h1 {
    Copy Email Button
    ========================================================================== */
 .copy-email {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
     border: none;
     background: transparent;
-    color: var(--text-muted);
+    padding: 0;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--text-main);
     cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    transition: color 0.2s ease, background 0.2s ease;
-    flex-shrink: 0;
+    transition: color 0.2s ease;
 }
 
 .copy-email:hover {
-    color: var(--primary-color);
-    background: var(--tag-bg);
+    color: var(--text-main);
+    text-decoration: underline;
 }
 
-.copy-email.copied {
-    color: #22c55e;
+.author__urls a {
+    color: var(--text-main);
+    background-image: none;
+}
+
+.author__urls a:hover {
+    color: var(--text-main);
+    text-decoration: underline;
 }
 
 /* Toast */

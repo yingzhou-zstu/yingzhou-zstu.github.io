@@ -72,7 +72,8 @@
                         <li><div style="white-space: normal; margin-bottom: 1em; color: var(--text-muted); font-weight: 500;">Quantum Functional Materials.</div></li>
                         <li><i class="fas fa-fw fa-map-marker-alt"></i> Hangzhou, China</li>
                         <li><i class="fas fa-fw fa-university"></i> Zhejiang Sci-Tech University</li>
-                        <li><i class="fas fa-fw fa-envelope"></i> zhouying_arale@163.com <button class="copy-email" id="copyEmail" aria-label="Copy email"><i class="fas fa-copy"></i></button></li>
+                        <li><i class="fas fa-fw fa-envelope"></i> <button class="copy-email" id="copyEmail" aria-label="Copy email">Email</button></li>
+                        <li><i class="fas fa-fw fa-graduation-cap"></i> <a href="https://scholar.google.com/citations?hl=ja&user=NNUW3t4AAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
                     </ul>
                 </div>
             </div>
@@ -743,9 +744,7 @@
             var email = 'zhouying_arale@163.com';
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(email).then(function() {
-                    copyBtn.classList.add('copied');
                     showToast('Email copied!');
-                    setTimeout(function() { copyBtn.classList.remove('copied'); }, 1500);
                 }).catch(function() {
                     fallbackCopy(email);
                 });
@@ -763,9 +762,7 @@
             ta.select();
             try {
                 document.execCommand('copy');
-                copyBtn.classList.add('copied');
                 showToast('Email copied!');
-                setTimeout(function() { copyBtn.classList.remove('copied'); }, 1500);
             } catch (e) {
                 showToast('Copy failed, please manually copy');
             }
