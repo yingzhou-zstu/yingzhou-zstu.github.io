@@ -609,11 +609,22 @@ h1 {
 /* Publication Styling */
 .publication-list li {
     padding-left: 20px;
-    border-left: 3px solid rgba(49,130,206,0.45);
+    border-left: 3px solid var(--pub-accent-soft, rgba(49,130,206,0.45));
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, border-left-color 0.3s ease, background-color 0.3s ease;
     position: relative;
     overflow: hidden;
 }
+
+/* Per-journal accent colors */
+.pub-j-prl    { --pub-accent: #1f3b73; --pub-accent-soft: rgba(31, 59, 115, 0.45); }
+.pub-j-prb    { --pub-accent: #3d6ea5; --pub-accent-soft: rgba(61, 110, 165, 0.45); }
+.pub-j-prm    { --pub-accent: #41737f; --pub-accent-soft: rgba(65, 115, 127, 0.45); }
+.pub-j-prappl { --pub-accent: #5a7d5a; --pub-accent-soft: rgba(90, 125, 90, 0.45); }
+.pub-j-nc     { --pub-accent: #e8740c; --pub-accent-soft: rgba(232, 116, 12, 0.45); }
+.pub-j-sa     { --pub-accent: #c8102e; --pub-accent-soft: rgba(200, 16, 46, 0.45); }
+.pub-j-afm    { --pub-accent: #0b6e4f; --pub-accent-soft: rgba(11, 110, 79, 0.45); }
+.pub-j-cpl    { --pub-accent: #9b2226; --pub-accent-soft: rgba(155, 34, 38, 0.45); }
+.pub-j-cpb    { --pub-accent: #457b9d; --pub-accent-soft: rgba(69, 123, 157, 0.45); }
 
 .publication-list .pub-content {
     position: relative;
@@ -649,7 +660,60 @@ h1 {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
     border-color: #cbd5e0;
-    border-left-color: var(--accent-red);
+    border-left-color: var(--pub-accent, var(--accent-red));
+}
+
+/* Hover shine sweep */
+.publication-list li::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -60%;
+    width: 40%;
+    height: 140%;
+    background: linear-gradient(105deg, transparent 15%, rgba(255,255,255,0.28) 50%, transparent 85%);
+    transform: skewX(-20deg);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.25s ease;
+}
+
+.publication-list li:hover::after {
+    left: 110%;
+    opacity: 1;
+    transition: left 0.65s ease, opacity 0.2s ease;
+}
+
+/* Zoom hint badge over figure */
+.publication-list li::before {
+    content: '\f00e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 26px;
+    bottom: 16px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.55);
+    color: #fff;
+    font-size: 0.75rem;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transform: scale(0.7);
+    pointer-events: none;
+    z-index: 3;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.publication-list li:hover::before {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .publication-list p {
@@ -677,10 +741,10 @@ h1 {
 .pub-venue {
     display: inline-block;
     padding: 2px 8px;
-    border: 1px solid rgba(49,130,206,0.3);
+    border: 1px solid color-mix(in srgb, var(--pub-accent, var(--accent-blue)) 30%, transparent);
     border-radius: 999px;
     color: #fff;
-    background: linear-gradient(135deg, var(--accent-blue), #1a4972);
+    background: linear-gradient(135deg, var(--pub-accent, var(--accent-blue)), color-mix(in srgb, var(--pub-accent, #1a4972) 72%, #000));
     font-size: 0.7rem;
     font-weight: 700;
     margin-right: 8px;
